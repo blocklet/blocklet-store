@@ -1,0 +1,197 @@
+diff --git a/lib/ssrf-protector.js b/lib/ssrf-protector.js
+index 44203828d1357afbd4a2c2a4283d1222a3939fa6..d34c6cc1ef275393dded2ca5d194c697340702e1 100644
+--- a/lib/ssrf-protector.js
++++ b/lib/ssrf-protector.js
+@@ -1,26 +1,153 @@
+ /**
+  * SSRF Protector
+  */
+-const isPrivateIP = require('private-ip');
+ const isIP = require('is-ip');
+ const dns = require('dns');
++const net = require('net');
+ const { isDidDomainUrl } = require('./url-evaluation');
+ 
+-// private-ip does not cover multicast ranges (CVE: GHSA-jm66-6qc7-hx83)
+-// IPv4 multicast: 224.0.0.0/4 (224-239.x.x.x)
+-// IPv6 multicast: ff00::/8
+-function isMulticastIP(ip) {
+-  if (!ip) return false;
+-  const ipv4Match = ip.match(/^(\d{1,3})\./);
+-  if (ipv4Match) {
+-    const first = parseInt(ipv4Match[1], 10);
+-    return first >= 224 && first <= 239;
+-  }
+-  return /^[Ff][Ff]/i.test(ip);
++const BLOCKED_IPV4_RANGES = [
++  ['0.0.0.0', 8],
++  ['10.0.0.0', 8],
++  ['100.64.0.0', 10],
++  ['127.0.0.0', 8],
++  ['169.254.0.0', 16],
++  ['172.16.0.0', 12],
++  ['192.0.0.0', 24],
++  ['192.0.2.0', 24],
++  ['192.31.196.0', 24],
++  ['192.52.193.0', 24],
++  ['192.88.99.0', 24],
++  ['192.168.0.0', 16],
++  ['192.175.48.0', 24],
++  ['198.18.0.0', 15],
++  ['198.51.100.0', 24],
++  ['203.0.113.0', 24],
++  ['224.0.0.0', 4],
++  ['240.0.0.0', 4],
++  ['255.255.255.255', 32],
++];
++
++const BLOCKED_IPV6_RANGES = [
++  ['::', 128],
++  ['::1', 128],
++  ['::ffff:0:0', 96],
++  ['64:ff9b::', 96],
++  ['100::', 64],
++  ['2001::', 32],
++  ['2001:2::', 48],
++  ['2001:db8::', 32],
++  ['2002::', 16],
++  ['fc00::', 7],
++  ['fe80::', 10],
++  ['ff00::', 8],
++];
++
++function ipv4ToInt(ip) {
++  if (net.isIP(ip) !== 4) {
++    return null;
++  }
++
++  return ip.split('.').reduce((result, item) => (result << 8) + Number(item), 0) >>> 0;
++}
++
++function isIPv4InRange(ip, base, prefix) {
++  const ipValue = ipv4ToInt(ip);
++  const baseValue = ipv4ToInt(base);
++
++  if (ipValue === null || baseValue === null) {
++    return false;
++  }
++
++  const mask = prefix === 0 ? 0 : (0xffffffff << (32 - prefix)) >>> 0;
++  return (ipValue & mask) === (baseValue & mask);
++}
++
++function normalizeIPv6(ip) {
++  const address = ip.split('%')[0].toLowerCase();
++
++  if (net.isIP(address) !== 6) {
++    return null;
++  }
++
++  if (!address.includes('.')) {
++    return address;
++  }
++
++  const lastColon = address.lastIndexOf(':');
++  const ipv4 = address.slice(lastColon + 1);
++  const ipv4Value = ipv4ToInt(ipv4);
++
++  if (ipv4Value === null) {
++    return null;
++  }
++
++  return `${address.slice(0, lastColon)}:${((ipv4Value >>> 16) & 0xffff).toString(16)}:${(ipv4Value & 0xffff).toString(
++    16
++  )}`;
++}
++
++function ipv6ToBigInt(ip) {
++  const address = normalizeIPv6(ip);
++
++  if (!address) {
++    return null;
++  }
++
++  const sections = address.split('::');
++  if (sections.length > 2) {
++    return null;
++  }
++
++  const left = sections[0] ? sections[0].split(':') : [];
++  const right = sections[1] ? sections[1].split(':') : [];
++  const fill = new Array(8 - left.length - right.length).fill('0');
++  const groups = sections.length === 1 ? left : [...left, ...fill, ...right];
++
++  if (groups.length !== 8) {
++    return null;
++  }
++
++  return groups.reduce((result, group) => (result << 16n) + BigInt(parseInt(group || '0', 16)), 0n);
++}
++
++function isIPv6InRange(ip, base, prefix) {
++  const ipValue = ipv6ToBigInt(ip);
++  const baseValue = ipv6ToBigInt(base);
++
++  if (ipValue === null || baseValue === null) {
++    return false;
++  }
++
++  const bits = 128n;
++  const hostBits = bits - BigInt(prefix);
++  const mask = hostBits === bits ? 0n : ((1n << bits) - 1n) ^ ((1n << hostBits) - 1n);
++
++  return (ipValue & mask) === (baseValue & mask);
+ }
+ 
+ function isBlockedIP(ip) {
+-  return isPrivateIP(ip) || isMulticastIP(ip);
++  if (net.isIP(ip) === 4) {
++    return BLOCKED_IPV4_RANGES.some(([base, prefix]) => isIPv4InRange(ip, base, prefix));
++  }
++
++  if (net.isIP(ip) === 6) {
++    return BLOCKED_IPV6_RANGES.some(([base, prefix]) => isIPv6InRange(ip, base, prefix));
++  }
++
++  return false;
++}
++
++function getHostnameIP(hostname) {
++  if (!hostname) {
++    return '';
++  }
++
++  if (hostname.startsWith('[') && hostname.endsWith(']')) {
++    return hostname.slice(1, -1);
++  }
++
++  return hostname;
+ }
+ 
+ // 允许的协议， 只允许 https
+@@ -101,9 +228,11 @@ async function isAllowedURL(url) {
+       return false;
+     }
+ 
++    const hostnameIP = getHostnameIP(hostname);
++
+     // 如果是IP地址，直接验证
+-    if (isIP(hostname)) {
+-      return !isBlockedIP(hostname);
++    if (isIP(hostnameIP)) {
++      return !isBlockedIP(hostnameIP);
+     }
+ 
+     // 如果域名在跳过列表中，则直接返回true
+diff --git a/package.json b/package.json
+index 34c593c23d50e43a437e0264be7ff90dcbffab64..943a761d684e5eebb07567890d9abd7c35e1e18f 100644
+--- a/package.json
++++ b/package.json
+@@ -64,7 +64,6 @@
+     "p-retry": "^4.6.2",
+     "p-wait-for": "^3.2.0",
+     "parallel-transform": "^1.2.0",
+-    "private-ip": "^2.3.4",
+     "public-ip": "^4.0.4",
+     "pump": "^3.0.0",
+     "request-ip": "^3.3.0",
