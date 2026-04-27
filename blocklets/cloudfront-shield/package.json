@@ -1,0 +1,43 @@
+{
+  "name": "@blocklet/cloudfront-shield",
+  "version": "0.18.19",
+  "description": "Using AWS lambda to check paid blocklets",
+  "private": true,
+  "main": "index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "lint": "eslint src tests",
+    "lint:fix": "pnpm lint --fix",
+    "coverage": "vitest run --coverage",
+    "prebuild": "rm -rf dist",
+    "build": "esbuild src/index.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js",
+    "postbuild": "cd dist && zip -r function.zip index.js*",
+    "predeploy": "npm run build",
+    "create": "aws lambda create-function --function-name \"$AWS_LAMBDA_FUNCTION_NAME\" --runtime \"nodejs22.x\" --role \"$AWS_LAMBDA_ROLE_ARN\" --zip-file \"fileb://dist/function.zip\" --handler index.handler",
+    "preupload": "npm run build",
+    "upload": "aws lambda update-function-code --function-name \"$AWS_LAMBDA_FUNCTION_NAME\" --zip-file fileb://dist/function.zip"
+  },
+  "author": "skyepesky ye",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@arcblock/eslint-config-ts": "^0.3.3",
+    "@types/aws-lambda": "^8.10.145",
+    "@types/lodash": "^4.17.10",
+    "@types/node": "^20.12.12",
+    "@typescript-eslint/eslint-plugin": "^5.59.5",
+    "@vitest/coverage-v8": "^3.2.4",
+    "esbuild": "^0.25.0",
+    "eslint": "^8.57.0",
+    "typescript": "5.1.6",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "@blocklet/util": "workspace:^",
+    "axios": "^1.15.2",
+    "lodash-es": "^4.17.21",
+    "tslib": "^2.6.2"
+  }
+}

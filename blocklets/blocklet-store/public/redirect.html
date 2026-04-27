@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ABT Node Blocklet Store</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
+      const { origin, pathname, search } = new URL(window.location);
+      window.location.href = `${origin}${pathname.replace(/\/+$/, '')}/store${search}`;
+    </script>
+  </body>
+</html>

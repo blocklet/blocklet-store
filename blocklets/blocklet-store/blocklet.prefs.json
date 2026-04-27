@@ -1,0 +1,1299 @@
+{
+  "form": {
+    "labelCol": 6,
+    "wrapperCol": 12,
+    "colon": false,
+    "layout": "vertical",
+    "style": {
+      "padding": "16px 16px 16px 16px"
+    },
+    "size": "default"
+  },
+  "schema": {
+    "type": "object",
+    "properties": {
+      "11omq50nnzd": {
+        "type": "void",
+        "x-component": "FormTab",
+        "x-component-props": {
+          "style": {
+            "width": "auto"
+          }
+        },
+        "x-designable-id": "11omq50nnzd",
+        "x-index": 0,
+        "properties": {
+          "kjenw14s5k6": {
+            "type": "void",
+            "x-component": "FormTab.TabPane",
+            "x-component-props": {
+              "tab": "Blocklets"
+            },
+            "x-designable-id": "kjenw14s5k6",
+            "x-index": 0,
+            "properties": {
+              "needReview": {
+                "type": "boolean",
+                "title": "Need Review",
+                "x-decorator": "FormItem",
+                "x-component": "Switch",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "description": "Enable review when publishing blocklet.",
+                "default": false,
+                "name": "needReview",
+                "x-designable-id": "olmndycb02h",
+                "x-index": 0
+              },
+              "reviewEachVersion": {
+                "type": "boolean",
+                "title": "Review each version",
+                "x-decorator": "FormItem",
+                "x-component": "Switch",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "description": "Each version release requires review.",
+                "default": true,
+                "name": "reviewEachVersion",
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "boolean",
+                      "source": "11omq50nnzd.kjenw14s5k6.needReview",
+                      "name": "needReview"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "visible": "{{$deps.needReview}}"
+                    }
+                  }
+                },
+                "x-designable-id": "ef6knjys7aj",
+                "x-index": 1
+              },
+              "04zr2wi3a0d": {
+                "type": "string",
+                "x-component": "Text",
+                "x-component-props": {
+                  "style": {
+                    "margin": "0px 0px 24px 0px"
+                  },
+                  "content": "Settings to customize blocklet uploading and pricing "
+                },
+                "x-designable-id": "04zr2wi3a0d",
+                "x-index": 2
+              },
+              "maxBundleSize": {
+                "type": "number",
+                "title": "Max Bundle Size (MB)",
+                "x-decorator": "FormItem",
+                "x-component": "NumberPicker",
+                "x-validator": "number",
+                "x-component-props": {
+                  "max": 1024,
+                  "min": 8,
+                  "step": 1,
+                  "precision": 0
+                },
+                "x-decorator-props": {},
+                "name": "maxBundleSize",
+                "description": "Max blocklet bundle size this store allows, blocklets that exceeds this setting will be rejected on uploading.",
+                "default": "500",
+                "required": true,
+                "x-designable-id": "m8hw92ysxie",
+                "x-index": 3
+              },
+              "allowPaidBlocklets": {
+                "type": "boolean",
+                "title": "Allow Paid Blocklets",
+                "x-decorator": "FormItem",
+                "x-component": "Switch",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {
+                  "layout": "vertical",
+                  "labelAlign": "left"
+                },
+                "name": "allowPaidBlocklets",
+                "default": false,
+                "description": "A restart to blocklet store is required if you turn this on for the first time.",
+                "x-designable-id": "2u277r1tlul",
+                "x-index": 4
+              },
+              "maxPrice": {
+                "type": "number",
+                "title": "Max Price (ABT)",
+                "x-decorator": "FormItem",
+                "x-component": "NumberPicker",
+                "x-validator": "number",
+                "x-component-props": {
+                  "max": 10000,
+                  "min": 1,
+                  "step": 0.05,
+                  "stringMode": false,
+                  "precision": 2
+                },
+                "x-decorator-props": {},
+                "description": "Maximum price can be set for a paid blocklet",
+                "name": "maxPrice",
+                "default": "10000",
+                "required": true,
+                "x-designable-id": "zvp2wio9zhp",
+                "x-index": 5,
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "boolean",
+                      "source": "11omq50nnzd.kjenw14s5k6.allowPaidBlocklets",
+                      "name": "allowPaidBlocklets"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "visible": "{{$deps.allowPaidBlocklets}}"
+                    }
+                  }
+                }
+              },
+              "minPrice": {
+                "type": "number",
+                "title": "Min Price (ABT)",
+                "x-decorator": "FormItem",
+                "x-component": "NumberPicker",
+                "x-validator": "number",
+                "x-component-props": {
+                  "max": 1,
+                  "min": 0.01,
+                  "step": 0.05,
+                  "stringMode": false,
+                  "precision": 2
+                },
+                "x-decorator-props": {},
+                "description": "Minimum price can be set for a paid blocklet",
+                "name": "minPrice",
+                "default": "0.01",
+                "required": true,
+                "x-designable-id": "0a395zuy5kp",
+                "x-index": 6,
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "boolean",
+                      "source": "11omq50nnzd.kjenw14s5k6.allowPaidBlocklets",
+                      "name": "allowPaidBlocklets"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "visible": "{{$deps.allowPaidBlocklets}}"
+                    }
+                  }
+                }
+              },
+              "shareRequirement": {
+                "type": "number",
+                "title": "Share Requirement",
+                "x-decorator": "FormItem",
+                "x-component": "NumberPicker",
+                "x-validator": "number",
+                "x-component-props": {
+                  "max": 1,
+                  "min": 0,
+                  "step": 0.05,
+                  "stringMode": false,
+                  "precision": 2
+                },
+                "x-decorator-props": {},
+                "description": "Percentage of revenue share for each blocklet purchase",
+                "name": "shareRequirement",
+                "default": "0.3",
+                "required": true,
+                "x-designable-id": "yqtw2u3lc0s",
+                "x-index": 7,
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "boolean",
+                      "source": "11omq50nnzd.kjenw14s5k6.allowPaidBlocklets",
+                      "name": "allowPaidBlocklets"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "visible": "{{$deps.allowPaidBlocklets}}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "lynj3ozsial": {
+            "type": "void",
+            "x-component": "FormTab.TabPane",
+            "x-component-props": {
+              "tab": "Permissions"
+            },
+            "x-designable-id": "lynj3ozsial",
+            "x-index": 1,
+            "properties": {
+              "8hjlw8jr1bd": {
+                "type": "string",
+                "x-component": "Text",
+                "x-component-props": {
+                  "style": {
+                    "margin": "0px 0px 24px 0px"
+                  },
+                  "content": "Customize how developers get access to this store and publish blocklets from this store"
+                },
+                "x-designable-id": "8hjlw8jr1bd",
+                "x-index": 0
+              },
+              "permissionMode": {
+                "type": "string | number",
+                "title": "Permission Mode",
+                "x-decorator": "FormItem",
+                "x-component": "Radio.Group",
+                "enum": [
+                  {
+                    "children": [],
+                    "label": "Inviting Based",
+                    "value": "inviting"
+                  },
+                  {
+                    "children": [],
+                    "label": "Staking Based",
+                    "value": "staking"
+                  }
+                ],
+                "x-validator": [],
+                "x-component-props": {
+                  "optionType": "default",
+                  "buttonStyle": "outline"
+                },
+                "x-decorator-props": {
+                  "layout": "vertical",
+                  "style": {
+                    "display": "block"
+                  },
+                  "fullness": false
+                },
+                "name": "permissionMode",
+                "default": "inviting",
+                "description": "",
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "any"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "description": "{{$self.value === 'staking' ? 'In staking based mode, users need to stake to get developer passport and publish blocklets (every time).' : 'In inviting based mode, users need to be invited to get the developer passport, then they can publish blocklets without any limitation.'}}"
+                    }
+                  }
+                },
+                "x-designable-id": "12gqw7g05tn",
+                "x-index": 1
+              },
+              "passportStakeAmount": {
+                "type": "number",
+                "title": "Passport Stake Amount",
+                "x-decorator": "FormItem",
+                "x-component": "NumberPicker",
+                "x-validator": "number",
+                "x-component-props": {
+                  "max": 1000,
+                  "min": 1
+                },
+                "x-decorator-props": {
+                  "fullness": false
+                },
+                "name": "passportStakeAmount",
+                "default": "1",
+                "required": true,
+                "description": "Amount of [Currency] to stake for the developer passport",
+                "x-designable-id": "wqryg1teyo5",
+                "x-index": 2,
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "string | number",
+                      "source": "11omq50nnzd.lynj3ozsial.permissionMode",
+                      "name": "permissionMode"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "visible": "{{$deps.permissionMode === 'staking'}}"
+                    }
+                  }
+                }
+              },
+              "passportStakeCurrency": {
+                "type": "string",
+                "title": "Passport Stake Amount Currency",
+                "x-decorator": "FormItem",
+                "x-component": "Input",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "name": "passportStakeCurrency",
+                "description": "The Currency for stake",
+                "default": "ABT",
+                "x-designable-id": "rga7a65fl24",
+                "x-index": 3
+              },
+              "passportRevokeWaitingDays": {
+                "type": "number",
+                "title": "Passport Stake Revoke Waiting Period",
+                "x-decorator": "FormItem",
+                "x-component": "NumberPicker",
+                "x-validator": "number",
+                "x-component-props": {
+                  "max": 90,
+                  "min": 1
+                },
+                "x-decorator-props": {},
+                "name": "passportRevokeWaitingDays",
+                "default": "7",
+                "required": true,
+                "description": "Waiting period before developer can claim revoked stakes for their developer passport (in days)",
+                "x-designable-id": "okfjb2384o7",
+                "x-index": 4,
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "string | number",
+                      "source": "11omq50nnzd.lynj3ozsial.permissionMode",
+                      "name": "permissionMode"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "visible": "{{$deps.permissionMode === 'staking'}}"
+                    }
+                  }
+                }
+              },
+              "publishStakeAmount": {
+                "type": "number",
+                "title": "Publish Stake Amount",
+                "x-decorator": "FormItem",
+                "x-component": "NumberPicker",
+                "x-validator": "number",
+                "x-component-props": {
+                  "max": 1000,
+                  "min": 1
+                },
+                "x-decorator-props": {},
+                "name": "publishStakeAmount",
+                "default": "1",
+                "required": true,
+                "description": "Amount of ABT to stake for each publish publish, this is also used as base staking amount for paid blocklets",
+                "x-designable-id": "2nhy6iqswun",
+                "x-index": 5,
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "string | number",
+                      "source": "11omq50nnzd.lynj3ozsial.permissionMode",
+                      "name": "permissionMode"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "visible": "{{$deps.permissionMode === 'staking'}}"
+                    }
+                  }
+                }
+              },
+              "publishRevokeWaitingDays": {
+                "type": "number",
+                "title": "Publish Stake Revoke Waiting Period",
+                "x-decorator": "FormItem",
+                "x-component": "NumberPicker",
+                "x-validator": "number",
+                "x-component-props": {
+                  "max": 90,
+                  "min": 1
+                },
+                "x-decorator-props": {},
+                "name": "publishRevokeWaitingDays",
+                "default": "30",
+                "required": true,
+                "description": "Waiting period before developer can claim revoked stakes for their blocklet publish (in days)",
+                "x-designable-id": "bblwuuiw36e",
+                "x-index": 6,
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "string | number",
+                      "source": "11omq50nnzd.lynj3ozsial.permissionMode",
+                      "name": "permissionMode"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "visible": "{{$deps.permissionMode === 'staking'}}"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "bp57b4coxr4": {
+            "type": "void",
+            "x-component": "FormTab.TabPane",
+            "x-component-props": {
+              "tab": "Integration"
+            },
+            "x-designable-id": "bp57b4coxr4",
+            "x-index": 2,
+            "properties": {
+              "launcherUrl": {
+                "type": "string",
+                "title": "Blocklet Launcher URL",
+                "x-decorator": "FormItem",
+                "x-component": "Input",
+                "x-validator": "url",
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "name": "launcherUrl",
+                "description": "Users will be redirect to this launcher service on launch blocklets",
+                "default": "https://install.arcblock.io/launch/",
+                "required": true,
+                "x-designable-id": "45wbazn7byc",
+                "x-index": 0
+              }
+            }
+          },
+          "l8rimjhsqbp": {
+            "type": "void",
+            "x-component": "FormTab.TabPane",
+            "x-component-props": {
+              "tab": "HomeBanner"
+            },
+            "x-designable-id": "l8rimjhsqbp",
+            "x-index": 3,
+            "properties": {
+              "homeBanner": {
+                "type": "array",
+                "x-decorator": "FormItem",
+                "x-component": "ArrayTable",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "name": "homeBanner",
+                "x-designable-id": "1n3svx35w37",
+                "x-index": 0,
+                "items": {
+                  "type": "object",
+                  "x-designable-id": "qkv8ch9xuiy",
+                  "properties": {
+                    "_did": {
+                      "type": "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        "title": "DID"
+                      },
+                      "name": "_did",
+                      "x-designable-id": "zngzq9ogrre",
+                      "x-index": 0,
+                      "properties": {
+                        "did": {
+                          "type": "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
+                          "x-validator": [],
+                          "x-component-props": {},
+                          "x-decorator-props": {},
+                          "name": "did",
+                          "x-designable-id": "tc24x8im2ps",
+                          "x-index": 0,
+                          "required": true
+                        }
+                      }
+                    },
+                    "_remark": {
+                      "type": "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        "title": "Remark"
+                      },
+                      "name": "_remark",
+                      "x-designable-id": "f5fg30k3biv",
+                      "x-index": 1,
+                      "properties": {
+                        "remark": {
+                          "type": "string",
+                          "title": "",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
+                          "x-validator": [],
+                          "x-component-props": {},
+                          "x-decorator-props": {},
+                          "name": "remark",
+                          "x-designable-id": "kle9uncz9mz",
+                          "x-index": 0
+                        }
+                      }
+                    },
+                    "_cover": {
+                      "type": "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        "title": "Cover"
+                      },
+                      "name": "_cover",
+                      "x-designable-id": "vj5mlgkwivr",
+                      "x-index": 2,
+                      "properties": {
+                        "cover": {
+                          "type": "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
+                          "x-validator": [],
+                          "x-component-props": {},
+                          "x-decorator-props": {},
+                          "name": "cover",
+                          "x-designable-id": "00hwb99qbrr",
+                          "x-index": 0
+                        }
+                      }
+                    },
+                    "z97fvi5udsm": {
+                      "type": "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        "title": "Name"
+                      },
+                      "x-designable-id": "z97fvi5udsm",
+                      "x-index": 3,
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
+                          "x-validator": [],
+                          "x-component-props": {},
+                          "x-decorator-props": {},
+                          "name": "name",
+                          "x-designable-id": "gjf9fa4g3g9",
+                          "x-index": 0
+                        }
+                      }
+                    },
+                    "0nmdmmjczv8": {
+                      "type": "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        "title": "Description"
+                      },
+                      "x-designable-id": "0nmdmmjczv8",
+                      "x-index": 4,
+                      "properties": {
+                        "desc": {
+                          "type": "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input.TextArea",
+                          "x-validator": [],
+                          "x-component-props": {},
+                          "x-decorator-props": {},
+                          "name": "desc",
+                          "x-designable-id": "ah0wckp67z1",
+                          "x-index": 0
+                        }
+                      }
+                    },
+                    "38g47luy99i": {
+                      "type": "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        "title": "Base Download"
+                      },
+                      "x-designable-id": "38g47luy99i",
+                      "x-index": 5,
+                      "properties": {
+                        "baseNum": {
+                          "type": "number",
+                          "x-decorator": "FormItem",
+                          "x-component": "NumberPicker",
+                          "x-validator": [],
+                          "x-component-props": {},
+                          "x-decorator-props": {},
+                          "name": "baseNum",
+                          "x-designable-id": "j2xymuijtxi",
+                          "x-index": 0
+                        }
+                      }
+                    },
+                    "ihya0b2ncme": {
+                      "type": "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        "title": "Link"
+                      },
+                      "x-designable-id": "ihya0b2ncme",
+                      "x-index": 6,
+                      "properties": {
+                        "link": {
+                          "type": "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
+                          "x-validator": [],
+                          "x-component-props": {},
+                          "x-decorator-props": {},
+                          "name": "link",
+                          "x-designable-id": "jr7r77dr8sb",
+                          "x-index": 0
+                        }
+                      }
+                    },
+                    "bdlwmyttdx2": {
+                      "type": "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        "title": "Option"
+                      },
+                      "x-designable-id": "bdlwmyttdx2",
+                      "x-index": 7,
+                      "properties": {
+                        "jpai2kptlpe": {
+                          "type": "void",
+                          "x-component": "ArrayTable.Remove",
+                          "x-designable-id": "jpai2kptlpe",
+                          "x-index": 0
+                        },
+                        "ktetnchbdnq": {
+                          "type": "void",
+                          "x-component": "ArrayTable.MoveDown",
+                          "x-designable-id": "ktetnchbdnq",
+                          "x-index": 1
+                        },
+                        "y63xj6bhccc": {
+                          "type": "void",
+                          "x-component": "ArrayTable.MoveUp",
+                          "x-designable-id": "y63xj6bhccc",
+                          "x-index": 2
+                        }
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "4pjtgr0gy6u": {
+                    "type": "void",
+                    "title": "Add",
+                    "x-component": "ArrayTable.Addition",
+                    "x-component-props": {},
+                    "x-designable-id": "4pjtgr0gy6u",
+                    "x-index": 0
+                  }
+                }
+              }
+            }
+          },
+          "officialAccounts": {
+            "type": "void",
+            "x-component": "FormTab.TabPane",
+            "x-component-props": {
+              "tab": "OfficialAccounts"
+            },
+            "name": "officialAccounts",
+            "x-designable-id": "7nlwjp5wwxd",
+            "x-index": 4,
+            "properties": {
+              "officialAccounts": {
+                "type": "array",
+                "x-decorator": "FormItem",
+                "x-component": "ArrayTable",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "name": "officialAccounts",
+                "x-designable-id": "157djutjrcl",
+                "x-index": 0,
+                "items": {
+                  "type": "object",
+                  "x-designable-id": "1giqeb4i5bp",
+                  "properties": {
+                    "_userDid": {
+                      "type": "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        "title": "User DID"
+                      },
+                      "name": "_userDid",
+                      "x-designable-id": "oxymwvlc35s",
+                      "x-index": 0,
+                      "properties": {
+                        "did": {
+                          "type": "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
+                          "x-validator": [],
+                          "x-component-props": {},
+                          "x-decorator-props": {},
+                          "name": "did",
+                          "required": true,
+                          "x-designable-id": "spcmys1gshi",
+                          "x-index": 0
+                        }
+                      }
+                    },
+                    "_remark": {
+                      "type": "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        "title": "Remark"
+                      },
+                      "name": "_remark",
+                      "x-designable-id": "jrfvterg8tq",
+                      "x-index": 1,
+                      "properties": {
+                        "remark": {
+                          "type": "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
+                          "x-validator": [],
+                          "x-component-props": {},
+                          "x-decorator-props": {},
+                          "name": "remark",
+                          "x-designable-id": "5dameviqc3t",
+                          "x-index": 0
+                        }
+                      }
+                    },
+                    "59dft1bzbzc": {
+                      "type": "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        "title": "Title"
+                      },
+                      "x-designable-id": "59dft1bzbzc",
+                      "x-index": 2,
+                      "properties": {
+                        "bodls0jtbhp": {
+                          "type": "void",
+                          "x-component": "ArrayTable.Remove",
+                          "x-designable-id": "bodls0jtbhp",
+                          "x-index": 0
+                        },
+                        "a3rhs5x8hat": {
+                          "type": "void",
+                          "x-component": "ArrayTable.MoveDown",
+                          "x-designable-id": "a3rhs5x8hat",
+                          "x-index": 1
+                        },
+                        "hyh24qwk07s": {
+                          "type": "void",
+                          "x-component": "ArrayTable.MoveUp",
+                          "x-designable-id": "hyh24qwk07s",
+                          "x-index": 2
+                        }
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "4pewc3buk88": {
+                    "type": "void",
+                    "title": "Addition",
+                    "x-component": "ArrayTable.Addition",
+                    "x-component-props": {},
+                    "x-designable-id": "4pewc3buk88",
+                    "x-index": 0
+                  }
+                }
+              }
+            }
+          },
+          "blockletRequirement": {
+            "type": "void",
+            "x-component": "FormTab.TabPane",
+            "x-component-props": {
+              "tab": "BlockletRequirement"
+            },
+            "x-designable-id": "ujfeayminj3",
+            "x-index": 5,
+            "name": "blockletRequirement",
+            "properties": {
+              "_blockletRequirement": {
+                "type": "void",
+                "x-component": "FormCollapse",
+                "x-component-props": {},
+                "x-designable-id": "3jvj9ygbwk5",
+                "x-index": 0,
+                "name": "_blockletRequirement",
+                "properties": {
+                  "logo": {
+                    "type": "void",
+                    "x-component": "FormCollapse.CollapsePanel",
+                    "x-component-props": {
+                      "header": "Logo"
+                    },
+                    "x-designable-id": "rcdthhlpa7m",
+                    "x-index": 0,
+                    "name": "logo",
+                    "properties": {
+                      "maxLogoSize": {
+                        "type": "string",
+                        "title": "Max Logo Size (KB)",
+                        "x-decorator": "FormItem",
+                        "x-component": "Input",
+                        "x-validator": [],
+                        "x-component-props": {
+                          "addonAfter": "KB",
+                          "suffix": "",
+                          "maxLength": null
+                        },
+                        "x-decorator-props": {
+                          "wrapperWidth": "200px",
+                          "colon": true
+                        },
+                        "name": "maxLogoSize",
+                        "x-designable-id": "esgosyrhv73",
+                        "x-index": 0,
+                        "default": "500",
+                        "x-display": "visible",
+                        "required": true
+                      },
+                      "logoImageType": {
+                        "type": "Array<string | number>",
+                        "title": "Logo Image Type",
+                        "x-decorator": "FormItem",
+                        "x-component": "Checkbox.Group",
+                        "enum": [
+                          {
+                            "children": [],
+                            "label": "png",
+                            "value": "png"
+                          },
+                          {
+                            "children": [],
+                            "label": "jpg",
+                            "value": "jpg"
+                          },
+                          {
+                            "children": [],
+                            "label": "svg",
+                            "value": "svg"
+                          },
+                          {
+                            "children": [],
+                            "label": "webp",
+                            "value": "webp"
+                          }
+                        ],
+                        "x-validator": [],
+                        "x-decorator-props": {},
+                        "name": "logoImageType",
+                        "default": "png,jpg,svg,webp",
+                        "x-designable-id": "cft8f7jrjcv",
+                        "x-index": 1
+                      }
+                    }
+                  },
+                  "screenshot": {
+                    "type": "void",
+                    "x-component": "FormCollapse.CollapsePanel",
+                    "x-component-props": {
+                      "header": "Screenshot"
+                    },
+                    "x-designable-id": "p9quu43mreh",
+                    "x-index": 1,
+                    "name": "screenshot",
+                    "properties": {
+                      "maxImageSize": {
+                        "type": "string",
+                        "title": "Max Image Size (MB)",
+                        "x-decorator": "FormItem",
+                        "x-component": "Input",
+                        "x-validator": [],
+                        "x-component-props": {
+                          "addonAfter": "MB",
+                          "suffix": "",
+                          "maxLength": null
+                        },
+                        "x-decorator-props": {
+                          "wrapperWidth": "200px",
+                          "colon": true
+                        },
+                        "name": "maxImageSize",
+                        "x-designable-id": "5iky0nfoeji",
+                        "x-index": 0,
+                        "default": 5,
+                        "x-display": "visible",
+                        "required": true
+                      },
+                      "minImageCount": {
+                        "type": "string",
+                        "title": "Min Image Count",
+                        "x-decorator": "FormItem",
+                        "x-component": "Input",
+                        "x-validator": [],
+                        "x-component-props": {
+                          "addonAfter": "",
+                          "suffix": "",
+                          "maxLength": null
+                        },
+                        "x-decorator-props": {
+                          "wrapperWidth": "200px",
+                          "colon": true
+                        },
+                        "name": "minImageCount",
+                        "x-designable-id": "52tg1u5ws0b",
+                        "x-index": 1,
+                        "default": 3,
+                        "x-display": "visible",
+                        "required": true
+                      },
+                      "maxImageCount": {
+                        "type": "string",
+                        "title": "Max Image Count",
+                        "x-decorator": "FormItem",
+                        "x-component": "Input",
+                        "x-validator": [],
+                        "x-component-props": {
+                          "addonAfter": "",
+                          "suffix": "",
+                          "maxLength": null
+                        },
+                        "x-decorator-props": {
+                          "wrapperWidth": "200px",
+                          "colon": true
+                        },
+                        "name": "maxImageCount",
+                        "x-designable-id": "7ilkh208j8x",
+                        "x-index": 2,
+                        "default": 5,
+                        "x-display": "visible",
+                        "required": true
+                      },
+                      "imageMinWidth": {
+                        "type": "string",
+                        "title": "Image Min Width (px)",
+                        "x-decorator": "FormItem",
+                        "x-component": "Input",
+                        "x-validator": "number",
+                        "x-component-props": {
+                          "addonAfter": "px",
+                          "suffix": "",
+                          "maxLength": null
+                        },
+                        "x-decorator-props": {
+                          "wrapperWidth": "200px",
+                          "colon": true
+                        },
+                        "name": "imageMinWidth",
+                        "x-designable-id": "myhdlcdhpj6",
+                        "x-index": 3,
+                        "default": 600,
+                        "x-display": "visible",
+                        "required": true,
+                        "x-reactions": {
+                          "dependencies": [
+                            {
+                              "property": "value",
+                              "type": "any"
+                            }
+                          ],
+                          "fulfill": {
+                            "state": {}
+                          }
+                        }
+                      },
+                      "imageMinHeight": {
+                        "type": "string",
+                        "title": "Image Min Height (px)",
+                        "x-decorator": "FormItem",
+                        "x-component": "Input",
+                        "x-validator": "number",
+                        "x-component-props": {
+                          "addonAfter": "px",
+                          "suffix": "",
+                          "maxLength": null
+                        },
+                        "x-decorator-props": {
+                          "wrapperWidth": "200px",
+                          "colon": true
+                        },
+                        "name": "imageMinHeight",
+                        "x-designable-id": "3c5090tfs7q",
+                        "x-index": 4,
+                        "x-display": "visible",
+                        "required": false,
+                        "x-reactions": {
+                          "dependencies": [
+                            {
+                              "property": "value",
+                              "type": "string",
+                              "source": "11omq50nnzd.blockletRequirement._blockletRequirement.screenshot.imageMinWidth",
+                              "name": "imageMinWidth"
+                            }
+                          ],
+                          "fulfill": {
+                            "state": {
+                              "value": "{{ \n\n$effect(()=>{\n   $self.value =  Math.round($deps.imageMinWidth * 9 / 16)  \n},[ $deps.imageMinWidth ])}}",
+                              "initialValue": "{{$effect(()=>{\n   $self.value =  Math.round($deps.imageMinWidth * 9 / 16)  \n},[ $deps.imageMinWidth ])}}"
+                            }
+                          }
+                        },
+                        "x-pattern": "disabled",
+                        "description": "The image aspect ratio is fixed at 16:10",
+                        "default": 338
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "gf3icj66f3x": {
+            "type": "void",
+            "x-component": "FormTab.TabPane",
+            "x-component-props": {
+              "tab": "AI",
+              "style": {
+                "width": "inherit"
+              }
+            },
+            "x-designable-id": "gf3icj66f3x",
+            "x-index": 6,
+            "properties": {
+              "aigneApiModel": {
+                "type": "string",
+                "title": "aigne api model",
+                "x-decorator": "FormItem",
+                "x-component": "Input.TextArea",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "name": "aigneApiModel",
+                "required": false,
+                "x-designable-id": "91x1q1galxi",
+                "x-index": 0,
+                "default": "",
+                "description": ""
+              },
+              "searchBlockletsInstructions": {
+                "type": "string",
+                "title": "search blocklets instructions",
+                "x-decorator": "FormItem",
+                "x-component": "Input.TextArea",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "name": "searchBlockletsInstructions",
+                "required": false,
+                "x-designable-id": "q7n56efkscy",
+                "x-index": 1,
+                "default": "As an app store search assistant, generate 5 relevant lowercase single-word English keywords, e.g., output 'demo' instead of 'demo app', to help users efficiently find apps. Input: {{ question }}"
+              },
+              "aigneInvokeCacheTTL": {
+                "type": "string",
+                "title": "Aigne invoke cache ttl",
+                "x-decorator": "FormItem",
+                "x-component": "Input.TextArea",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "name": "aigneInvokeCacheTTL",
+                "required": false,
+                "x-designable-id": "zkccxm9ctqf",
+                "x-index": 2,
+                "default": "1d",
+                "description": "example: 1s, 1m, 1h, 1d(default: 1h)"
+              },
+              "aigneApiCacheTTL": {
+                "type": "string",
+                "title": "Aigne api cache ttl",
+                "x-decorator": "FormItem",
+                "x-component": "Input.TextArea",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "name": "aigneApiCacheTTL",
+                "required": false,
+                "x-designable-id": "mb8u31oyr54",
+                "x-index": 3,
+                "default": "10m",
+                "description": "example: 1s, 1m, 1h, 1d(default: 10m)"
+              }
+            }
+          },
+          "dataRetention": {
+            "type": "void",
+            "x-component": "FormTab.TabPane",
+            "x-component-props": {
+              "tab": "Data Retention"
+            },
+            "x-designable-id": "dr1retention",
+            "x-index": 7,
+            "name": "dataRetention",
+            "properties": {
+              "dr1desc": {
+                "type": "string",
+                "x-component": "Text",
+                "x-component-props": {
+                  "style": {
+                    "margin": "0px 0px 24px 0px"
+                  },
+                  "content": "Automatically clean up old blocklet version tarballs to reclaim disk space. DB records are preserved for audit."
+                },
+                "x-designable-id": "dr1desc",
+                "x-index": 0
+              },
+              "retentionEnabled": {
+                "type": "boolean",
+                "title": "Enable Retention",
+                "x-decorator": "FormItem",
+                "x-component": "Switch",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "description": "Enable automatic version cleanup. When disabled, no cleanup will run.",
+                "default": false,
+                "name": "retentionEnabled",
+                "x-designable-id": "dr1enabled",
+                "x-index": 1
+              },
+              "retentionDryRun": {
+                "type": "boolean",
+                "title": "Dry Run Mode",
+                "x-decorator": "FormItem",
+                "x-component": "Switch",
+                "x-validator": [],
+                "x-component-props": {},
+                "x-decorator-props": {},
+                "description": "When enabled, only logs what would be deleted without actually removing files. Recommended to enable first to preview cleanup scope.",
+                "default": false,
+                "name": "retentionDryRun",
+                "x-designable-id": "dr1dryrun",
+                "x-index": 2
+              },
+              "retentionKeepVersions": {
+                "type": "number",
+                "title": "Keep Published Versions",
+                "x-decorator": "FormItem",
+                "x-component": "NumberPicker",
+                "x-validator": "number",
+                "x-component-props": {
+                  "min": 1,
+                  "max": 1000,
+                  "step": 1,
+                  "precision": 0
+                },
+                "x-decorator-props": {},
+                "description": "Number of most recent published versions to keep per blocklet.",
+                "default": 90,
+                "name": "retentionKeepVersions",
+                "required": true,
+                "x-designable-id": "dr1keepver",
+                "x-index": 3,
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "boolean",
+                      "source": "11omq50nnzd.dataRetention.retentionEnabled",
+                      "name": "retentionEnabled"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "display": "{{$deps.retentionEnabled ? 'visible' : 'none'}}"
+                    }
+                  }
+                }
+              },
+              "retentionKeepMinDays": {
+                "type": "number",
+                "title": "Min Retention Days",
+                "x-decorator": "FormItem",
+                "x-component": "NumberPicker",
+                "x-validator": "number",
+                "x-component-props": {
+                  "min": 1,
+                  "max": 3650,
+                  "step": 1,
+                  "precision": 0
+                },
+                "x-decorator-props": {},
+                "description": "Published versions within this many days will never be cleaned up.",
+                "default": 180,
+                "name": "retentionKeepMinDays",
+                "required": true,
+                "x-designable-id": "dr1mindays",
+                "x-index": 4,
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "boolean",
+                      "source": "11omq50nnzd.dataRetention.retentionEnabled",
+                      "name": "retentionEnabled"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "display": "{{$deps.retentionEnabled ? 'visible' : 'none'}}"
+                    }
+                  }
+                }
+              },
+              "retentionStaleDraftDays": {
+                "type": "number",
+                "title": "Stale Draft Days",
+                "x-decorator": "FormItem",
+                "x-component": "NumberPicker",
+                "x-validator": "number",
+                "x-component-props": {
+                  "min": 1,
+                  "max": 3650,
+                  "step": 1,
+                  "precision": 0
+                },
+                "x-decorator-props": {},
+                "description": "DRAFT, REJECTED, and CANCELLED versions older than this will be cleaned up.",
+                "default": 90,
+                "name": "retentionStaleDraftDays",
+                "required": true,
+                "x-designable-id": "dr1staledays",
+                "x-index": 5,
+                "x-reactions": {
+                  "dependencies": [
+                    {
+                      "property": "value",
+                      "type": "boolean",
+                      "source": "11omq50nnzd.dataRetention.retentionEnabled",
+                      "name": "retentionEnabled"
+                    }
+                  ],
+                  "fulfill": {
+                    "state": {
+                      "display": "{{$deps.retentionEnabled ? 'visible' : 'none'}}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "x-designable-id": "xmgh1u7fjbr"
+  }
+}

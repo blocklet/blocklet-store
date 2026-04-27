@@ -1,0 +1,116 @@
+import flat from 'flat';
+
+const en = {
+  common: {
+    title: 'Blocklet Store',
+    searchStore: 'Search Blocklet',
+    showResources: 'Show extensions',
+    official: 'Official Blocklets',
+    price: 'Price',
+    category: 'Category',
+    categories: 'Categories',
+    resourceType: 'Resource Type',
+    clear: 'Clear',
+    cancel: 'Cancel',
+    search: 'Search',
+    fetchError: 'Failed to fetch data, please try again later',
+    searchPlaceholder: 'Search blocklet',
+  },
+  explore: {
+    title: 'Explore',
+    trending: 'Trending',
+    topRated: 'Top Rated',
+    recentlyUpdated: 'Recently Updated',
+    viewDetail: 'View Details',
+  },
+  sort: {
+    sort: 'Sort',
+    rating: 'Rating',
+    popularity: 'Most Popular',
+    lastPublished: 'Latest Published',
+  },
+  category: {
+    all: 'All',
+    placeholder: 'Category name',
+    helperText: 'Please select a category',
+  },
+  blocklet: {
+    noResults: 'No blocklet found.',
+    free: 'Free',
+    search: 'Results for "{keyword}"',
+    authorTag: 'Blocklet by {name}',
+    resourceTag: 'Extensions for {name}',
+    resultCount: '{count} Blocklets',
+    emptyTip: 'Tips:',
+    filterTip: 'Appropriately reduce the filter conditions',
+    keywordTip: 'Try other keywords',
+    owner: 'Blocklets from {name}',
+    noBlockletPart1: 'No Blocklets associated with"',
+    noBlockletPart2: '"were found',
+    noCategoryResults1: 'No "',
+    noCategoryResults2: '" Blocklets',
+  },
+  autocomplete: {
+    expandResult: 'View all search results for "{name}"',
+  },
+};
+
+const zh = {
+  common: {
+    title: 'Blocklet 商店',
+    searchStore: '搜索 Blocklet',
+    showResources: '显示扩展',
+    official: '官方 Blocklet',
+    price: '价格',
+    category: '类别',
+    categories: '类别',
+    resourceType: '资源类型',
+    clear: '清除',
+    cancel: '取消',
+    search: '搜索',
+    fetchError: '获取数据失败, 请稍后再试',
+    searchPlaceholder: '搜索 Blocklet',
+  },
+  explore: {
+    title: '探索',
+    trending: '趋势',
+    topRated: '评分最高',
+    recentlyUpdated: '最近更新',
+    viewDetail: '查看详情',
+  },
+  sort: {
+    sort: '排序',
+    rating: '评分',
+    popularity: '最热门',
+    lastPublished: '最新发布',
+  },
+  category: {
+    all: '全部',
+    placeholder: '分类名称',
+    helperText: '请选择分类',
+  },
+  blocklet: {
+    noResults: '未搜索到 Blocklet',
+    free: '免费',
+    search: '搜索 "{keyword}" 的结果',
+    authorTag: '{name} 的 Blocklet',
+    resourceTag: '{name} 的拓展',
+    resultCount: '{count} 个 Blocklet',
+    emptyTip: '建议:',
+    filterTip: '适当减少筛选条件',
+    keywordTip: '尝试其他关键字',
+    owner: '来自 {name} 的 Blocklets',
+    noBlockletPart1: '没有找到与"',
+    noBlockletPart2: '"相关的 Blocklets',
+    noCategoryResults1: '无 "',
+    noCategoryResults2: '" 类别的 Blocklets',
+  },
+  autocomplete: {
+    expandResult: '查看 “{name}” 的所有搜索结果',
+  },
+};
+
+export default {
+  en: flat(en),
+  zh: flat(zh),
+};

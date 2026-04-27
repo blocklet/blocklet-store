@@ -1,0 +1,44 @@
+.tmp.mk
+node_modules
+.idea
+.DS_Store
+.blocklet
+
+.env
+.env.*
+!.env.example
+!**/.env.example
+.aigne/
+**/.aigne/
+.vscode/launch.json
+
+blocklet.js
+!**/blocklet.js
+.eslintcache
+yarn-error.log
+build
+
+.blocklet-server
+.cypress
+# testing
+coverage*
+.nyc_output
+cypress/screenshots/
+blocklets/blocklet-store/cypress.json
+blocklets/blocklet-store/cypress/screenshots/
+
+.yalc
+yalc.lock
+
+.vscode
+!.vscode/settings.json
+
+storybook-static/
+
+dist/
+.nx
+# lerna debug log
+lerna-debug.log
+
+# Breaking changes documentation (temporary)
+BREAKING_CHANGE.MD

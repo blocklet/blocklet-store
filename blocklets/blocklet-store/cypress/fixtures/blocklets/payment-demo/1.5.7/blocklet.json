@@ -1,0 +1,63 @@
+{
+  "name": "payment-demo-blocklet",
+  "version": "1.5.7",
+  "description": "Demo blocklet that shows how developers earn crypto tokens by setting price for blocklets",
+  "keywords": ["demo", "game", "blocklet"],
+  "author": {
+    "name": "wangshijun",
+    "email": "wangshijun2010@gmail.com",
+    "url": "http://github.com/wangshijun"
+  },
+  "title": "payment-demo",
+  "files": ["app/", "logo.png", "blocklet.yml", "blocklet.md", "README.md"],
+  "license": "MIT",
+  "did": "z8iZyFxvvqwW98MiqKv1tmws2o3iTZnTajE3B",
+  "group": "static",
+  "main": "app",
+  "logo": "logo.png",
+  "community": "",
+  "documentation": "",
+  "homepage": "",
+  "screenshots": [],
+  "environments": [],
+  "specVersion": "1.2.4",
+  "interfaces": [
+    {
+      "type": "web",
+      "name": "publicUrl",
+      "path": "/",
+      "prefix": "*",
+      "port": "BLOCKLET_PORT",
+      "protocol": "tcp"
+    }
+  ],
+  "timeout": {
+    "start": 60
+  },
+  "requirements": {
+    "abtnode": ">=1.1.0",
+    "os": "*",
+    "cpu": "*"
+  },
+  "children": [],
+  "payment": {
+    "price": [
+      {
+        "address": "z35n3WVTnN7KrR4gXn3szR6oneVefkBBx78Fc",
+        "value": 8.88
+      }
+    ]
+  },
+  "capabilities": {
+    "clusterMode": false,
+    "component": true
+  },
+  "gitHash": "8515db4143df6d9db9d28b77c19ab94abec654bc",
+  "path": "/static/payment-demo-blocklet",
+  "nftFactory": "",
+  "dist": {
+    "tarball": "payment-demo-blocklet-1.5.7.tgz",
+    "integrity": "sha512-lW2qSz3GcHciYxV4kVQcOs945ckN7HJ3wTPRWRdVUSWx+ArwaUg0QaOLcjIUvPHpk+tvKqqjNrSHkKmnND0ong==",
+    "size": 12311
+  }
+}

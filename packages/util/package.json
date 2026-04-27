@@ -1,0 +1,50 @@
+{
+  "name": "@blocklet/util",
+  "version": "0.18.19",
+  "author": "skypesky ye",
+  "license": "Apache-2.0",
+  "description": "",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src tests",
+    "lint:fix": "pnpm lint --fix",
+    "coverage": "vitest run --coverage",
+    "prebuild": "rm -fr dist",
+    "build": "unbuild"
+  },
+  "devDependencies": {
+    "@arcblock/eslint-config-ts": "^0.3.3",
+    "@types/lodash": "^4.17.10",
+    "@types/lodash-es": "^4.17.12",
+    "@types/node": "^20.12.12",
+    "@typescript-eslint/eslint-plugin": "^5.59.5",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^8.57.0",
+    "tslib": "^2.6.2",
+    "typescript": "5.1.6",
+    "unbuild": "^2.0.0",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "@arcblock/did": "^1.29.27",
+    "@arcblock/jwt": "^1.29.27",
+    "@ocap/util": "^1.29.27",
+    "@ocap/wallet": "^1.29.27",
+    "lodash-es": "^4.17.21"
+  }
+}

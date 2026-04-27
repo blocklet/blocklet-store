@@ -1,0 +1,13 @@
+{
+  "version": "0.18.19",
+  "npmClient": "pnpm",
+  "command": {
+    "publish": {
+      "message": "[skip ci] %s"
+    }
+  },
+  "packages": [
+    "blocklets/*",
+    "packages/*"
+  ]
+}

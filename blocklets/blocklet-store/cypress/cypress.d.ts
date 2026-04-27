@@ -1,0 +1,9 @@
+// in cypress/support/index.ts
+// load type definitions that come with Cypress module
+/// <reference types="cypress" />
+
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    verifyPurchaseBlocklet({ tokenUrl, user }: { tokenUrl: string; user?: string }): Chainable<Subject>;
+  }
+}

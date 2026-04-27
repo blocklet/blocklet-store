@@ -1,0 +1,17 @@
+packages:
+  - packages/*
+  - blocklets/*
+
+onlyBuiltDependencies:
+  - '@blocklet/puppeteer'
+  - canvas
+  - core-js
+  - core-js-pure
+  - cypress
+  - esbuild
+  - fast-folder-size
+  - fsevents
+  - husky
+  - leveldown
+  - protobufjs
+  - sqlite3

@@ -1,0 +1,63 @@
+{
+  "name": "static-demo-blocklet",
+  "version": "1.1.22",
+  "description": "Demo blocklet that shows how to serve a static html5 game with Blocklet Server",
+  "keywords": ["demo", "game", "blocklet"],
+  "author": {
+    "name": "wangshijun",
+    "email": "wangshijun2010@gmail.com",
+    "url": "http://github.com/wangshijun"
+  },
+  "title": "static-demo",
+  "files": ["app/", "screenshots/", "logo.png", "blocklet.yml", "blocklet.md", "README.md"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blocklet/html-2048-sample.git"
+  },
+  "group": "static",
+  "main": "app",
+  "logo": "logo.png",
+  "community": "",
+  "documentation": "",
+  "homepage": "",
+  "screenshots": ["0-home.png"],
+  "environments": [],
+  "specVersion": "1.2.4",
+  "interfaces": [
+    {
+      "type": "web",
+      "name": "publicUrl",
+      "path": "/",
+      "prefix": "*",
+      "port": "BLOCKLET_PORT",
+      "protocol": "tcp"
+    }
+  ],
+  "did": "z8ia4e5vAeDsQEE2P26bQqz9oWR1Lxg9qUMaV",
+  "timeout": {
+    "start": 10
+  },
+  "payment": {
+    "price": [],
+    "share": []
+  },
+  "requirements": {
+    "abtnode": ">=1.1.0",
+    "os": "*",
+    "cpu": "*"
+  },
+  "children": [],
+  "capabilities": {
+    "clusterMode": false,
+    "component": true
+  },
+  "gitHash": "c26a0638f2875b7652609973848a9be10ab5f1b0",
+  "path": "/static/static-demo-blocklet",
+  "nftFactory": "",
+  "dist": {
+    "tarball": "static-demo-blocklet-1.1.22.tgz",
+    "integrity": "sha512-rUAD6s+0M4GZ0b5pWWzVrz2VwcXLyq4u7j1tKhaLaReKYD8ql0lxGaQszUZCNyQDUWu9ZEx0kN0hBCX4aNKexA==",
+    "size": 237501
+  }
+}

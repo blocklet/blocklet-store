@@ -1,0 +1,213 @@
+name: blocklet-registry-service
+description: Decentralized store for blocklets
+keywords:
+  - blocklet
+  - registry
+  - store
+author:
+  name: Arcblock
+  email: blocklet@arcblock.io
+repository:
+  type: git
+  url: git+https://github.com/blocklet/blocklet-store.git
+version: 0.18.19
+license: Apache-2.0
+title: Blocklet Store
+files:
+  - public
+  - api/hooks/*.js
+  - api/db/models/*.js
+  - api/db/migrations/*.js
+  - api/db/migration-utils/*.js
+  - api/db/migrate.js
+  - migration/*.js
+  - dist
+group: dapp
+main: api/index.js
+logo: logo.png
+community: https://community.arcblock.io
+support: support@arcblock.io
+documentation: https://www.arcblock.io
+homepage: https://github.com/blocklet/blocklet-store
+interfaces:
+  - type: web
+    name: publicUrl
+    path: /
+    prefix: '*'
+    protocol: http
+    port: BLOCKLET_PORT
+    cacheable:
+      - /assets
+    services:
+      - name: auth
+        config:
+          blockUnauthenticated: false
+          whoCanAccess: all
+          profileFields:
+            - fullName
+            - email
+            - avatar
+          allowSwitchProfile: true
+          ignoreUrls: []
+          blockUnauthorized: false
+    endpoints:
+      - type: IssueVc
+        path: /store/api/did/acquire-asset/token
+        meta:
+          vcType: BlockletPurchaseCredential
+          payable: true
+          params:
+            - name: factory
+              description: Blocklet purchase credential factory address
+    proxyBehavior: service
+screenshots:
+  - explore-trending-blocklets.png
+  - blocklet-catalog-grid.png
+  - blocklet-detail-overview.png
+  - blocklet-reviews-comments.png
+  - blocklet-version-history.png
+environments:
+  - name: CHAIN_HOST
+    description: Please provide endpoint of the chain where NFT factory are stored
+    required: true
+    default: https://main.abtnetwork.io/api/
+    secure: false
+    shared: true
+scripts:
+  preStart: node api/hooks/pre-start.js
+  preFlight: node api/hooks/pre-flight.js
+  postStart: node api/hooks/post-start.js
+  dev: npm run start
+  e2eDev: npm run e2e-start
+specVersion: 1.2.8
+did: z8ia29UsENBg6tLZUKi2HABj38Cw1LmHZocbQ
+timeout:
+  script: 500
+  start: 60
+requirements:
+  server: '>=1.16.0'
+  os: '*'
+  cpu: '*'
+capabilities:
+  clusterMode: false
+  navigation: true
+  component: true
+  serverless: true
+  mcp: true
+payment:
+  price: []
+  share: []
+theme:
+  background: '#f7f8fa'
+navigation:
+  - id: resources
+    title:
+      en: Resources
+      zh: 资源
+    items:
+      - id: resources_platform
+        title: Blocklet Platform
+        link: https://www.blocklet.io
+      - id: resources_developer
+        title: Blocklet Developer
+        link: https://developer.blocklet.io
+    section:
+      - header
+  - id: profile
+    title:
+      en: Store
+      zh: 商店
+    link: /profile
+    section:
+      - userCenter
+  - id: developer
+    title:
+      en: Developer
+      zh: 开发者
+    icon: pixelarticons:device-laptop
+    section:
+      - dashboard
+    role:
+      - developer
+    items:
+      - id: developer__my_blocklets
+        title:
+          en: My Blocklets
+          zh: 我的应用
+        icon: icon-park-outline:all-application
+        link: /developer/blocklets
+      - id: developer__access_token
+        title:
+          en: Access Token
+          zh: 访问密钥
+        icon: material-symbols:vpn-key-outline
+        link: /developer/access-tokens
+  - id: admin
+    title:
+      en: Admin
+      zh: 管理员
+    icon: eos-icons:admin-outlined
+    section:
+      - dashboard
+    role:
+      - owner
+      - admin
+    items:
+      - id: admin__blocklets
+        title:
+          en: Blocklets
+          zh: 应用管理
+        icon: icon-park-outline:all-application
+        link: /console/blocklets
+      - id: admin__categories
+        title:
+          en: Categories
+          zh: 分类管理
+        icon: mdi:tag-outline
+        link: /console/categories
+  - id: manage__developer
+    title:
+      en: My Blocklets
+      zh: 我的应用
+    icon: ion:settings-outline
+    link: /developer/blocklets?from=sm
+    section:
+      - sessionManager
+    role:
+      - developer
+  - id: manage__admin
+    title:
+      en: Blocklets
+      zh: 管理应用
+    icon: ion:settings-outline
+    link: /console/blocklets?from=sm
+    section:
+      - sessionManager
+    role:
+      - admin
+      - owner
+components:
+  - name: did-comments
+    mountPoint: /did-comments
+    required: false
+    source:
+      store: https://store.blocklet.dev
+      name: did-comments
+      version: latest
+  - name: meilisearch
+    required: true
+    mountPoint: /meilisearch
+    source:
+      store: https://store.blocklet.dev
+      name: meilisearch
+      version: latest
+  - name: payment-kit
+    required: true
+    source:
+      store: https://store.blocklet.dev
+      name: z2qaCNvKMv5GjouKdcDWexv6WqtHbpNPQDnAk
+      version: latest
+egress: true
+events:
+  - type: store.blocklet.published
+    description: When a blocklet is published, will receive the blocklet info object
