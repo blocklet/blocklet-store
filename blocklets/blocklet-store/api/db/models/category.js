@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
-const { v4: uuidv4 } = require('uuid');
+const { randomUUID } = require('crypto');
 const { TABLES } = require('../constant');
 
 // category data example
@@ -20,12 +20,12 @@ function initModel(sequelize) {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: () => uuidv4(),
+        defaultValue: () => randomUUID(),
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: () => uuidv4(),
+        defaultValue: () => randomUUID(),
       },
       locales: {
         type: DataTypes.JSON,
@@ -49,10 +49,10 @@ function initModel(sequelize) {
         // implement something like id auto-generation in nedb
         beforeCreate: (item) => {
           if (!item.id) {
-            item.id = uuidv4();
+            item.id = randomUUID();
           }
           if (!item.name) {
-            item.name = uuidv4();
+            item.name = randomUUID();
           }
           item.createdAt = new Date();
           item.updatedAt = new Date();

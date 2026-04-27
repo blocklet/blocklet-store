@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
-const { v4: uuidv4 } = require('uuid');
+const { randomUUID } = require('crypto');
 const { TABLES } = require('../constant');
 
 // meilisearch-error data example
@@ -21,7 +21,7 @@ function initModel(sequelize) {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: () => uuidv4(),
+        defaultValue: () => randomUUID(),
       },
       blockletId: {
         type: DataTypes.STRING,
@@ -53,7 +53,7 @@ function initModel(sequelize) {
         // implement something like id auto-generation in nedb
         beforeCreate: (item) => {
           if (!item.id) {
-            item.id = uuidv4();
+            item.id = randomUUID();
           }
           if (!item.createdAt) {
             item.createdAt = new Date();

@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
-const { v4: uuidv4 } = require('uuid');
+const { randomUUID } = require('crypto');
 const { TABLES } = require('../constant');
 
 class MeilisearchSyncFailed extends Model {}
@@ -10,7 +10,7 @@ function initModel(sequelize) {
       failedId: {
         type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: () => uuidv4(),
+        defaultValue: () => randomUUID(),
       },
       id: {
         type: DataTypes.STRING,

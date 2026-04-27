@@ -37,7 +37,7 @@
   "dependencies": {
     "@blocklet/util": "workspace:^",
     "axios": "^1.15.2",
-    "lodash-es": "^4.17.21",
+    "lodash-es": "^4.18.1",
     "tslib": "^2.6.2"
   }
 }

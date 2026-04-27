@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
-const { v4: uuidv4 } = require('uuid');
+const { randomUUID } = require('crypto');
 const { TABLES, VERSION_STATUS } = require('../constant');
 
 // version model
@@ -11,7 +11,7 @@ function initModel(sequelize) {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: () => uuidv4(),
+        defaultValue: () => randomUUID(),
       },
       did: {
         type: DataTypes.STRING,
@@ -84,7 +84,7 @@ function initModel(sequelize) {
         // implement something like id auto-generation in nedb
         beforeCreate: (item) => {
           if (!item.id) {
-            item.id = uuidv4();
+            item.id = randomUUID();
           }
           const now = new Date();
           if (!item.createdAt) {
