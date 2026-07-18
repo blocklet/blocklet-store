@@ -64,7 +64,7 @@
     "@sentry/react": "^7.119.1",
     "@sentry/tracing": "^7.119.1",
     "@uiw/react-markdown-preview": "^4.0.24",
-    "adm-zip": "^0.5.10",
+    "adm-zip": "^0.6.0",
     "ahooks": "^3.7.11",
     "axios": "^1.15.2",
     "bindings": "^1.5.0",
